@@ -1,14 +1,10 @@
 package servlets;
 
 import com.tumejoropcion.bos.Bono;
-import com.tumejoropcion.servicios.IServicioBonosMockLocal;
-import com.tumejoropcion.servicios.ServicioBonosMock;
 import com.tumejoropcion.servicios.ServicioPersistenciaMock;
-import facebook4j.Facebook;
-import facebook4j.FacebookException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,55 +13,212 @@ import javax.servlet.http.HttpServletResponse;
 
 public class verHistorial extends HttpServlet {
 
-    private static final long serialVersionUID = -7453606094644144082L;
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
-    private IServicioBonosMockLocal persist;
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long ahora= System.currentTimeMillis();
-        //System.out.println("entró al servlet");
-        Facebook facebook = (Facebook) request.getSession().getAttribute("facebook");
-        String id= "defaultUser";
-        try{
-            id = facebook.getId();
-            System.out.println("pudo coger el id  " + id );
-            
-        }catch (Exception e)
-        {
-           System.out.println("no cogio el id del usuario, id userDefault");
-        }
-        ArrayList<Bono> resp = ServicioPersistenciaMock.darInstancia().darBonosDeUsuario(id);
-        try {
-            System.out.println("1");
-            String impr ="";
-            for (int i = 0; i < resp.size(); i++) {
-                Bono b = resp.get(i);
-                System.out.println("1.1");
-                impr += "Un Bono de la tienda " + b.darReferencia() + " , cuyo código es: " + b.darCodigo() + "\n";
+        List bonos =  ServicioPersistenciaMock.darInstancia().findAll(Bono.class);
+      
+        
+        PrintWriter respuesta = resp.getWriter();
+        respuesta.println("<!DOCTYPE html>");
+        respuesta.println("<!--[if lte IE 8]>               <html class=\"ie8 no-js\" lang=\"en\">    <![endif]-->");
+        respuesta.println("<!--[if lte IE 10]>              <html class=\"ie10 no-js\" lang=\"en\">   <![endif]-->");
+        respuesta.println("<!--[if !IE]>-->                 <html class=\"not-ie no-js\" lang=\"en\"> <!--<![endif]-->");
+        respuesta.println("<head>");
+        respuesta.println("");
+        respuesta.println("        <!-- Google Web Fonts");
+        respuesta.println("        ================================================== -->");
+        respuesta.println("        <link href='http://fonts.googleapis.com/css?family=Roboto:100,300,300italic,400,700|Julius+Sans+One|Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>");
+        respuesta.println("");
+        respuesta.println("        <!-- Basic Page Needs");
+        respuesta.println("        ================================================== -->");
+        respuesta.println("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
+        respuesta.println("");
+        respuesta.println("        <title>Accio</title>    ");
+        respuesta.println("");
+        respuesta.println("        <meta name=\"description\" content=\"\">");
+        respuesta.println("        <meta name=\"author\" content=\"\">");
+        respuesta.println("");
+        respuesta.println("        <!-- Favicons");
+        respuesta.println("        ================================================== -->");
+        respuesta.println("        <link rel=\"shortcut icon\" href=\"images/favicon.png\">");
+        respuesta.println("        <link rel=\"apple-touch-icon\" href=\"images/apple-touch-icon.png\">");
+        respuesta.println("        <link rel=\"apple-touch-icon\" sizes=\"72x72\" href=\"images/apple-touch-icon-72x72.png\">");
+        respuesta.println("        <link rel=\"apple-touch-icon\" sizes=\"114x114\" href=\"images/apple-touch-icon-114x114.png\">    ");
+        respuesta.println("");
+        respuesta.println("        <!-- Mobile Specific Metas");
+        respuesta.println("        ================================================== -->");
+        respuesta.println("        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\">");
+        respuesta.println("");
+        respuesta.println("        <!-- CSS");
+        respuesta.println("        ================================================== -->");
+        respuesta.println("        <link rel=\"stylesheet\" href=\"css/style.css\" />");
+        respuesta.println("        <link rel=\"stylesheet\" href=\"css/grid.css\" />");
+        respuesta.println("        <link rel=\"stylesheet\" href=\"css/layout.css\" />");
+        respuesta.println("        <link rel=\"stylesheet\" href=\"css/fontello.css\" />");
+        respuesta.println("        <link rel=\"stylesheet\" href=\"css/animation.css\" />");
+        respuesta.println("");
+        respuesta.println("        <link rel=\"stylesheet\" href=\"js/layerslider/css/layerslider.css\" />");
+        respuesta.println("        <link rel=\"stylesheet\" href=\"js/flexslider/flexslider.css\" />");
+        respuesta.println("        <link rel=\"stylesheet\" href=\"js/fancybox/jquery.fancybox.css\" />");
+        respuesta.println("");
+        respuesta.println("        <!-- HTML5 Shiv");
+        respuesta.println("        ================================================== -->");
+        respuesta.println("        <script src=\"js/jquery.modernizr.js\"></script>");
+        respuesta.println("");
+        respuesta.println("    </head>");
+        respuesta.println("    <body data-spy=\"scroll\" data-target=\"#navigation\" class=\"page-template\">");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <!-- - - - - - - - - - - - - - Loader - - - - - - - - - - - - - - - - -->   ");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <div class=\"loader\"></div><!--/ .loader-->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <!-- - - - - - - - - - - - - end Loader - - - - - - - - - - - - - - - -->   ");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->   ");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <header id=\"header\">");
+        respuesta.println("");
+        respuesta.println("            <div class=\"header-in\">");
+        respuesta.println("");
+        respuesta.println("                <h1 id=\"logo\"><a href=\"index.html\">TuMejorOpcion</a></h1>");
+        respuesta.println("");
+        respuesta.println("                <a id=\"responsive-nav-button\" class=\"responsive-nav-button\" href=\"#\"></a>");
+        respuesta.println("");
+        respuesta.println("                <nav id=\"navigation\" class=\"navigation\">");
+        respuesta.println("");
+        respuesta.println("                    <ul>");
+        respuesta.println("                        <li><a href=\"#\">Cuenta</a>");
+        respuesta.println("                            <ul>");
+        respuesta.println("                                <li><a href=\"./historial.html\">Registro de bonos comprados</a></li>");
+        respuesta.println("                                <li><a href=\"./logout.html\">Cerrar sesion</a></li>");
+        respuesta.println("                            </ul>");
+        respuesta.println("                        </li>");
+        respuesta.println("");
+        respuesta.println("                    </ul>");
+        respuesta.println("");
+        respuesta.println("                </nav><!--/ #navigation-->");
+        respuesta.println("");
+        respuesta.println("            </div><!--/ .header-in-->");
+        respuesta.println("");
+        respuesta.println("        </header><!--/ #header-->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <!-- - - - - - - - - - - - - end Header - - - - - - - - - - - - - - - -->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <!-- - - - - - - - - - - - - - Wrapper - - - - - - - - - - - - - - - - -->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <div id=\"wrapper\">");
+        respuesta.println("");
+        respuesta.println("            <section class=\"section\">");
+        respuesta.println("");
+        respuesta.println("                <div id=\"content\">");
+        respuesta.println("");
+        respuesta.println("                    <div class=\"container\">");
+        respuesta.println("");
+        respuesta.println("                        <div class=\"row\">");
+        respuesta.println("                            <div class=\"col-xs-12\">");
+        respuesta.println("                                <hgroup class=\"section-title align-center\">");
+        respuesta.println("                                    <h1>Historial de bonos</h1>");
+        respuesta.println("                                </hgroup>   ");
+        respuesta.println("                            </div>");
+        respuesta.println("                        </div><!--/ .row-->         ");
+        respuesta.println("");
+        respuesta.println("                        <div >");
+        respuesta.println("");
+        respuesta.println("                            <section>");
+        respuesta.println("                                <article class=\"entry\"> ");
+        respuesta.println("                                    <img alt=\"\" src=\"http://cdn-images.spaceclaim.com/spacer.gif\" >");
+        respuesta.println("                                     Bonos comprados");
+        respuesta.println("                                    <select name=\"Select\" value=\"seleccionarTienda\" multiple=\"multiple\">");
+         for (int i = 0; i < bonos.size(); i++){
+                Bono object =(Bono) bonos.get(i);
+        respuesta.println("                                        <option value=\"<"+ object.darCodigo()+ ">\">"+object.darTienda()+" [$"+object.darValor()+"]</option>");
             }
-            System.out.println("2");
-            if(impr != ""){
-            facebook.postStatusMessage(impr);
-            }else{
-                System.out.println("3");
-              facebook.postStatusMessage(" el usuario no ha comprado bonos aun");  
-            }
-          //  System.out.println("siguio");
-        } catch (FacebookException e) {
-            System.out.println("perdidas");
-            throw new ServletException(e);
+        respuesta.println("                                    </select>");
+        respuesta.println("                                </article><!--/ .entry-->");
+        respuesta.println("");
+        respuesta.println("                                 ");
+        respuesta.println("                              ");
+        respuesta.println("                            </section>");
+        respuesta.println("                            ");
+        respuesta.println("");
+        respuesta.println("                        </div><!--/ .row-->");
+        respuesta.println("");
+        respuesta.println("                    </div><!--/ .container-->");
+        respuesta.println("");
+        respuesta.println("                </div><!--/ #content-->");
+        respuesta.println("");
+        respuesta.println("            </section><!--/ .section-->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("            <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->");
+        respuesta.println("");
+        respuesta.println("            <footer id=\"footer\">");
+        respuesta.println("");
+        respuesta.println("                <div class=\"bottom-footer clearfix\">");
+        respuesta.println("");
+        respuesta.println("                    <div class=\"container\">");
+        respuesta.println("");
+        respuesta.println("                        <div class=\"row\">");
+        respuesta.println("");
+        respuesta.println("                            <div class=\"col-sm-6\">");
+        respuesta.println("");
+        respuesta.println("                                <div class=\"copyright\">");
+        respuesta.println("                                    Copyright © 2013. <a target=\"_blank\" href=\"http://webtemplatemasters.com\">ThemeMakers</a>. All rights reserved");
+        respuesta.println("                                </div><!--/ .cppyright-->");
+        respuesta.println("");
+        respuesta.println("                            </div>");
+        respuesta.println("");
+        respuesta.println("                            <div class=\"col-sm-3 col-sm-offset-3\">");
+        respuesta.println("");
+        respuesta.println("                                <div class=\"developed\">");
+        respuesta.println("                                    Developed by <a target=\"_blank\" href=\"http://webtemplatemasters.com/\">ThemeMakers</a>");
+        respuesta.println("                                </div><!--/ .developed-->");
+        respuesta.println("");
+        respuesta.println("                            </div>");
+        respuesta.println("");
+        respuesta.println("                        </div><!--/ .row-->");
+        respuesta.println("");
+        respuesta.println("                    </div><!--/ .container-->");
+        respuesta.println("");
+        respuesta.println("                </div><!--/ .bottom-footer-->   ");
+        respuesta.println("");
+        respuesta.println("            </footer><!--/ #footer-->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("            <!-- - - - - - - - - - - - - end Footer - - - - - - - - - - - - - - - -->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        </div><!--/ #wrapper-->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <!-- - - - - - - - - - - - - end Wrapper - - - - - - - - - - - - - - - -->");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("");
+        respuesta.println("        <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js\"></script>");
+        respuesta.println("<!--[if lt IE 9]>");
+        respuesta.println("    <script src=\"js/respond.min.js\"></script>");
+        respuesta.println("    <![endif]-->");
+        respuesta.println("    <script src=\"js/jquery.queryloader2.js\"></script>");
+        respuesta.println("    <script src=\"js/jquery.easing.1.3.min.js\"></script>");
+        respuesta.println("    <script src=\"js/jquery.cycle.all.min.js\"></script>");
+        respuesta.println("    <script src=\"js/jquery.smoothscroll.js\"></script>");
+        respuesta.println("    <script src=\"js/waypoints.min.js\"></script>");
+        respuesta.println("    <script src=\"twitter/jquery.tweet.js\"></script>");
+        respuesta.println("    <script src=\"js/fancybox/jquery.fancybox.pack.js\"></script>");
+        respuesta.println("    <script src=\"js/config.js\"></script>");
+        respuesta.println("    <script src=\"js/custom.js\"></script>");
+        respuesta.println("</body>");
+        respuesta.println("</html>");
 
-        }
-        response.sendRedirect(request.getContextPath() + "/");
-        PrintWriter out = response.getWriter();
-        //out.println("Lista de bonos:");
-        for (int i = 0; i < resp.size(); i++) {
-            Bono actual = resp.get(i);
-            //out.println(actual.darCodigo() + " | " + actual.darTienda());
-        }
-        long luego= System.currentTimeMillis();
-        long difference = luego-ahora;
-        //System.out.println("en consultar el historial de amigos se demora"+ difference);
     }
 }
