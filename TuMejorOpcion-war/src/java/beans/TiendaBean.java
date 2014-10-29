@@ -16,10 +16,10 @@ import com.tumejoropcion.bos.Bono;
 import com.tumejoropcion.bos.Tienda;
 import com.tumejoropcion.exception.OperacionInvalidaException;
 import com.tumejoropcion.servicios.IServicioBonosMockLocal;
-import com.tumejoropcion.servicios.IServicioPersistenciaMockLocal;
+import com.tumejoropcion.servicios.IServicioPersistenciaLocal;
 import com.tumejoropcion.servicios.IServicioTiendaMockLocal;
-import com.tumejoropcion.servicios.ServicioBonosMock;
-import com.tumejoropcion.servicios.ServicioPersistenciaMock;
+import com.tumejoropcion.servicios.ServicioBonos;
+import com.tumejoropcion.servicios.ServicioPersistenciaNoSql;
 import com.tumejoropcion.servicios.ServicioTiendaMock;
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -71,7 +71,7 @@ public class TiendaBean implements Serializable
     {
         tienda=new Tienda();
         servicio=new ServicioTiendaMock();
-        contactoBono = new ServicioBonosMock();
+        contactoBono = new ServicioBonos();
     }
 
     //-----------------------------------------------------------
@@ -128,7 +128,7 @@ public class TiendaBean implements Serializable
         FacesContext context = FacesContext.getCurrentInstance();
         Map map = context.getExternalContext().getRequestParameterMap();
 
-        servicio.eliminarTienda(tienda.darIdentificador());
+        servicio.eliminarTienda(tienda.getIdentificador());
     }
     
     
@@ -139,18 +139,7 @@ public class TiendaBean implements Serializable
        * @return true si está activo, false si ya se venció el bono
        */
         public boolean verficarSiBonoEstaActivo(String codBono){
-         Date hoy=new Date();
-         for(int i =0; i< tienda.darBonos().size();i++){
-         Bono actual= tienda.darBonos().get(i);
-         if(actual.darCodigo()==(codBono)){
-             if(actual.darFechaVencimiento().after(hoy)){
-                    actual.caduco();
-                 return false;   
-             }else
-                 return actual.estaVigente();
-            }
-           }
-           return false;
+         return true;
         }
         /**
          * Eliminar un bono desde una tienda

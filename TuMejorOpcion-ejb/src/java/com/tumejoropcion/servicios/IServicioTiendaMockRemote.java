@@ -24,7 +24,7 @@ public interface IServicioTiendaMockRemote
      * @param id Identificador único de la tienda
      * @throws com.tumejoropcion.exception.OperacionInvalidaException
      */
-    public void eliminarTienda(int id)throws OperacionInvalidaException;
+    public void eliminarTienda(String id)throws OperacionInvalidaException;
 
     /**
      * Devuelve todas las tiendas del sistema

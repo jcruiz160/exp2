@@ -1,7 +1,7 @@
 package servlets;
 
 import com.tumejoropcion.bos.Bono;
-import com.tumejoropcion.servicios.ServicioPersistenciaMock;
+import com.tumejoropcion.servicios.ServicioPersistenciaNoSql;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -16,7 +16,7 @@ public class verHistorial extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        List bonos =  ServicioPersistenciaMock.darInstancia().findAll(Bono.class);
+        //List bonos =  ServicioPersistenciaNoSql.darInstancia().findAll(Bono.class);
       
         
         PrintWriter respuesta = resp.getWriter();
@@ -138,10 +138,10 @@ public class verHistorial extends HttpServlet {
         respuesta.println("                                    <img alt=\"\" src=\"http://cdn-images.spaceclaim.com/spacer.gif\" >");
         respuesta.println("                                     Bonos comprados");
         respuesta.println("                                    <select name=\"Select\" value=\"seleccionarTienda\" multiple=\"multiple\">");
-         for (int i = 0; i < bonos.size(); i++){
-                Bono object =(Bono) bonos.get(i);
-        respuesta.println("                                        <option value=\"<"+ object.darCodigo()+ ">\">"+object.darTienda()+" [$"+object.darValor()+"]</option>");
-            }
+     //    for (int i = 0; i < bonos.size(); i++){
+      //          Bono object =(Bono) bonos.get(i);
+    //    respuesta.println("                                        <option value=\"<"+ object.darCodigo()+ ">\">"+object.darTienda()+" [$"+object.darValor()+"]</option>");
+     //       }
         respuesta.println("                                    </select>");
         respuesta.println("                                </article><!--/ .entry-->");
         respuesta.println("");

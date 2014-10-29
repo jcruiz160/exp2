@@ -30,21 +30,21 @@ public class Tienda {
     /**
      * Identificador único de la tienda
      */
-    public int identificador;
+    public String identificador;
     
     /**
      * Inicializa la tienda.
      */
     public Tienda() {
-        
+       bonos = new ArrayList<Bono>(); 
     }
     
-    public Tienda(String nombre, int identificador) {
+    public Tienda(String nombre, String identificador) {
         this.nombre = nombre;
         this.identificador = identificador;
         bonos = new ArrayList<Bono>();
-        GregorianCalendar c=new GregorianCalendar(12,12,2014);
-        Date k= c.getTime();
+        //GregorianCalendar c=new GregorianCalendar(12,12,2014);
+        //Date k= c.getTime();
         //Bono x= new Bono(1, 50000, "Hola",k );
     }
     
@@ -63,15 +63,7 @@ public class Tienda {
     public ArrayList<Bono> darBonos() {
         return bonos;
     }
-    
-    /**
-     * Muestra el indentificador de la tienda
-     * @return El identificador de la tienda
-     */
-    public int darIdentificador() {
-        return identificador;
-    }
-    
+  
     /**
      * Asigna un nuevo nombre a la tienda por uno que entra por parámetro.
      * @param nombre El nuevo nombre de la tienda. nombre != null & nombre != ""
@@ -80,14 +72,6 @@ public class Tienda {
         this.nombre = nombre;
     }
     
-    /**
-     * Asigna el nuevo identificador de la tienda por uno nuevo que entra por parámetro
-     * @param id El nuevo identificador de la tienda.
-     */
-    public void cambiarIdentificador(int id) {
-        identificador = id;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -104,11 +88,11 @@ public class Tienda {
         this.bonos = bonos;
     }
 
-    public int getIdentificador() {
+    public String getIdentificador() {
         return identificador;
     }
 
-    public void setIdentificador(int identificador) {
+    public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
     

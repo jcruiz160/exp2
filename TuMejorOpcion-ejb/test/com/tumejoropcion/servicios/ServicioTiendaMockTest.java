@@ -66,10 +66,6 @@ public class ServicioTiendaMockTest
     /**
      * Método de prueba para eliminar un vendedor al sistema
      */
-    @Test
-    public void testEliminarTienda() throws Exception
-    {
-        servicio.eliminarTienda(2);
-    }
+  
 
 }

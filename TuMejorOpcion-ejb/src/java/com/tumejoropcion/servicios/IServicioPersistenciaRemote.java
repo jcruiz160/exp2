@@ -9,7 +9,7 @@ import javax.ejb.Remote;
  * @author Juan Sebastián Urrego
  */
 @Remote
-public interface IServicioPersistenciaMockRemote
+public interface IServicioPersistenciaRemote
 {
 
     /**

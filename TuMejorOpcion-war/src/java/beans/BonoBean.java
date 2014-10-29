@@ -16,8 +16,8 @@ package beans;
 import com.tumejoropcion.bos.Bono;
 import com.tumejoropcion.exception.OperacionInvalidaException;
 import com.tumejoropcion.servicios.IServicioBonosMockLocal;
-import com.tumejoropcion.servicios.ServicioBonosMock;
-import com.tumejoropcion.servicios.ServicioPersistenciaMock;
+import com.tumejoropcion.servicios.ServicioBonos;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -61,7 +61,7 @@ public class BonoBean implements Serializable
     public BonoBean()
     {
         bono=new Bono();
-        servicio=new ServicioBonosMock();
+        servicio=new ServicioBonos();
     }
 
     //-----------------------------------------------------------
@@ -92,8 +92,7 @@ public class BonoBean implements Serializable
      */
     public List<Bono> getBonos()
     {
-
-        return servicio.getBono();
+        return servicio.getBonos();
     }
 
 

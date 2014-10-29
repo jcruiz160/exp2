@@ -8,7 +8,7 @@ import javax.ejb.Local;
  * Contrato funcional de los servicios de persistencia de manera local.
  */
 @Local
-public interface IServicioPersistenciaMockLocal
+public interface IServicioPersistenciaLocal
 {
     
     /**

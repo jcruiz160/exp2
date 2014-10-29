@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class Usuario {
     
+    private String id;
     private String email;
     private String nombre;
     private ArrayList bonos;
@@ -86,6 +87,14 @@ public class Usuario {
 
     public void setBonos(ArrayList bonos) {
         this.bonos = bonos;
+    }
+
+    public Object getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setId(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

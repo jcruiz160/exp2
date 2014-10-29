@@ -7,9 +7,9 @@ import com.tumejoropcion.bos.Tienda;
 import com.tumejoropcion.bos.Usuario;
 import com.tumejoropcion.exception.OperacionInvalidaException;
 import com.tumejoropcion.servicios.IServicioBonosMockLocal;
-import com.tumejoropcion.servicios.ServicioBonosMock;
+import com.tumejoropcion.servicios.ServicioBonos;
 import com.tumejoropcion.servicios.ServicioLoginMock;
-import com.tumejoropcion.servicios.ServicioPersistenciaMock;
+import com.tumejoropcion.servicios.ServicioPersistenciaNoSql;
 import facebook4j.Facebook;
 import facebook4j.FacebookException;
 import facebook4j.User;
@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public class funcionalidadBonos extends HttpServlet {
 
     private static final long serialVersionUID = -7453606094644144082L;
-
+    ServicioBonos bonos= new ServicioBonos();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
@@ -56,6 +56,7 @@ public class funcionalidadBonos extends HttpServlet {
         String message = request.getParameter("messagecomprar");
         String usuario = request.getParameter("usuario");
         Facebook facebook = (Facebook) request.getSession().getAttribute("facebook");
+       
         Date y = new Date();
         int valor = Integer.parseInt(message);
 
@@ -64,13 +65,13 @@ public class funcionalidadBonos extends HttpServlet {
 
             System.out.println("Agregó un bono");
             //Este metodo imprime el codigo del bono
-            ServicioPersistenciaMock.darInstancia().create(nuevo);
+            bonos.agregarBono(nuevo);
 
             System.out.println(tienda);
             System.out.println(y);
 
             //  System.out.println(ServicioPersistenciaMock.getBono().get(7).darCodigo()+"");
-            System.out.println(ServicioPersistenciaMock.darInstancia().findAll(Bono.class).size());
+            //System.out.println(ServicioPersistenciaNoSql.findAll(Bono.class));
             facebook.postStatusMessage("Compre un bono por un valor de " + message + " en la tienda " + tienda);
         } catch (FacebookException e) {
             throw new ServletException(e);

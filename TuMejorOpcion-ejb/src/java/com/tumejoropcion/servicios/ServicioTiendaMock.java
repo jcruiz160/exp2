@@ -20,7 +20,7 @@ public class ServicioTiendaMock implements IServicioTiendaMockRemote, IServicioT
      * Interface con referencia al servicio de persistencia en el sistema
      */
   
-    private IServicioPersistenciaMockLocal persistencia;
+    private IServicioPersistenciaLocal persistencia;
 
     //-----------------------------------------------------------
     // Constructor
@@ -30,7 +30,7 @@ public class ServicioTiendaMock implements IServicioTiendaMockRemote, IServicioT
      * Constructor de la clase sin argumentos
      */
     public ServicioTiendaMock()
-    {   persistencia =new ServicioPersistenciaMock();
+    {   persistencia =new ServicioPersistenciaNoSql();
     }
 
     //-----------------------------------------------------------
@@ -60,12 +60,12 @@ public class ServicioTiendaMock implements IServicioTiendaMockRemote, IServicioT
      * @throws OperacionInvalidaException 
      */
     @Override
-    public void eliminarTienda(int id)throws OperacionInvalidaException
+    public void eliminarTienda(String id)throws OperacionInvalidaException
     {
         Tienda b = (Tienda) persistencia.findById(Tienda.class, id);    
         try
         {
-            persistencia.delete(id);
+            persistencia.delete(b);
         } catch (OperacionInvalidaException ex)
         {
             throw new OperacionInvalidaException(ex.getMessage());
